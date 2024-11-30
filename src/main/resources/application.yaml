@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: VertexAiGenAI
+
+server:
+  port: 8081
+
+gemini:
+  projectId: ''
+  location: ''
+  transport: REST
+  modelOptions:
+    model: ''
+    temperature: 0.2
+    topP: 0.1
+    topK: 5
+    maxOutputTokens: 500
