@@ -1,6 +1,6 @@
 spring:
   application:
-    name: VertexAiGenAI
+    name: VertexAiGeminiAPI
 
 server:
   port: 8081

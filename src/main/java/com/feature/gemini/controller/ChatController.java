@@ -20,7 +20,7 @@ public class ChatController {
 
   @PostMapping(value = "/chat", consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<ChatReqsponse> generateContent(@RequestBody String prompt) {
-    final StopWatch stopWatch = new StopWatch();
+    var stopWatch = new StopWatch();
     stopWatch.start();
     var responseString = chatService.generateContent(prompt);
     stopWatch.stop();

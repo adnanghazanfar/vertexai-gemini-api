@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SimplePrompt {
 
   public static void main(String[] args) {
+    // replace values
     var vertexAiProperties = VertexAiProperties.builder()
             .projectId("{PROJECT_ID}")
             .location("{LOCATION}")
@@ -22,7 +23,7 @@ public class SimplePrompt {
                     .build())
             .build();
     var genAIConfiguration = new VertexAiConfiguration();
-    ChatService chatService = new ChatService(genAIConfiguration.generativeModel(vertexAiProperties));
+    var chatService = new ChatService(genAIConfiguration.generativeModel(vertexAiProperties));
     var textPrompt = """
         What's a good name for a flower shop that specializes in selling bouquets of dried flowers?"
         """;
