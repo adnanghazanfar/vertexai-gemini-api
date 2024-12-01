@@ -20,40 +20,40 @@ import java.util.List;
 @Configuration
 public class VertexAiConfiguration {
 
-  @Bean
-  public GenerativeModel generativeModel(VertexAiProperties vertexAiProperties) {
-    var vertexAI = new VertexAI.Builder()
-            .setProjectId(vertexAiProperties.getProjectId())
-            .setLocation(vertexAiProperties.getLocation())
-            .setTransport(Transport.valueOf(vertexAiProperties.getTransport()))
-            .build();
+    @Bean
+    public GenerativeModel generativeModel(VertexAiProperties vertexAiProperties) {
+        var vertexAI = new VertexAI.Builder()
+                .setProjectId(vertexAiProperties.getProjectId())
+                .setLocation(vertexAiProperties.getLocation())
+                .setTransport(Transport.valueOf(vertexAiProperties.getTransport()))
+                .build();
 
-    var generationConfig = GenerationConfig.newBuilder()
-        .setMaxOutputTokens(vertexAiProperties.getModelOptions().getMaxOutputTokens())
-        .setTemperature(vertexAiProperties.getModelOptions().getTemperature())
-        .setTopP(vertexAiProperties.getModelOptions().getTopP())
-        .setTopK(vertexAiProperties.getModelOptions().getTopK())
-        .build();
+        var generationConfig = GenerationConfig.newBuilder()
+                .setMaxOutputTokens(vertexAiProperties.getModelOptions().getMaxOutputTokens())
+                .setTemperature(vertexAiProperties.getModelOptions().getTemperature())
+                .setTopP(vertexAiProperties.getModelOptions().getTopP())
+                .setTopK(vertexAiProperties.getModelOptions().getTopK())
+                .build();
 
-    return new GenerativeModel.Builder()
-        .setModelName(vertexAiProperties.getModelOptions().getModel())
-        .setGenerationConfig(generationConfig)
-        .setSafetySettings(List.of(
-                SafetySetting.newBuilder()
-                        .setCategory(HarmCategory.HARM_CATEGORY_HATE_SPEECH)
-                        .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
-                        .build(),
-                SafetySetting.newBuilder()
-                        .setCategory(HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT)
-                        .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
-                        .build(),
-                SafetySetting.newBuilder()
-                        .setCategory(HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT)
-                        .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
-                        .build()
-        ))
-        .setVertexAi(vertexAI)
-        .build();
-  }
+        return new GenerativeModel.Builder()
+                .setModelName(vertexAiProperties.getModelOptions().getModel())
+                .setGenerationConfig(generationConfig)
+                .setSafetySettings(List.of(
+                        SafetySetting.newBuilder()
+                                .setCategory(HarmCategory.HARM_CATEGORY_HATE_SPEECH)
+                                .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
+                                .build(),
+                        SafetySetting.newBuilder()
+                                .setCategory(HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT)
+                                .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
+                                .build(),
+                        SafetySetting.newBuilder()
+                                .setCategory(HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT)
+                                .setThreshold(HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE)
+                                .build()
+                ))
+                .setVertexAi(vertexAI)
+                .build();
+    }
 
 }

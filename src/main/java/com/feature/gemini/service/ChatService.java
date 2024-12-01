@@ -11,19 +11,19 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ChatService {
 
-  final GenerativeModel generativeModel;
+    final GenerativeModel generativeModel;
 
-  public String generateContent(String textPrompt) {
-    try {
-      log.info("Generating content with prompt: {}.", textPrompt);
-      var response = generativeModel.generateContent(textPrompt);
-      var responseStr = ResponseHandler.getText(response);
-      log.info("Generated response: {}.", responseStr);
-      return responseStr;
-    } catch (Exception ex) {
-      log.error("Exception occurred while generating content.", ex);
-      return "Something went wrong";
+    public String generateContent(String textPrompt) {
+        try {
+            log.info("Generating content with prompt: {}.", textPrompt);
+            var response = generativeModel.generateContent(textPrompt);
+            var responseStr = ResponseHandler.getText(response);
+            log.info("Generated response: {}.", responseStr);
+            return responseStr;
+        } catch (Exception ex) {
+            log.error("Exception occurred while generating content.", ex);
+            return "Something went wrong";
+        }
     }
-  }
 
 }
